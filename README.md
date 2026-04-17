@@ -86,4 +86,4 @@ conn2flow-nexus/
 
 ## License
 
-MIT License © 2026 Otávio Serra
+MIT License © 2026 Conn2Flow Inc.
