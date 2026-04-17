@@ -1,0 +1,132 @@
+# =============================================================================
+# Conn2Flow Nexus AI - Docker Compose
+# Kafka (KRaft, no Zookeeper) + Redis + FastAPI App
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Kafka Broker (KRaft mode - combined broker + controller, no Zookeeper)
+  # ---------------------------------------------------------------------------
+  kafka:
+    image: apache/kafka:latest
+    container_name: c2f-kafka
+    ports:
+      - "9092:9092"       # Host access
+      - "29092:29092"     # Inter-container (mapped for debug tools)
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 168
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    healthcheck:
+      test: /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 > /dev/null 2>&1
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # ---------------------------------------------------------------------------
+  # Redis (Checkpointing + Cache)
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: c2f-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ---------------------------------------------------------------------------
+  # Conn2Flow Nexus AI - API (FastAPI)
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c2f-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./src:/app/src  # Hot-reload em dev
+
+  # ---------------------------------------------------------------------------
+  # Conn2Flow Nexus AI - Task Worker (Kafka Consumer)
+  # ---------------------------------------------------------------------------
+  worker-task:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c2f-worker-task
+    command: ["python", "-m", "src.workers.task_processor"]
+    env_file:
+      - .env
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./src:/app/src
+
+  # ---------------------------------------------------------------------------
+  # Conn2Flow Nexus AI - Delivery Worker (Webhook dispatcher)
+  # ---------------------------------------------------------------------------
+  worker-delivery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c2f-worker-delivery
+    command: ["python", "-m", "src.workers.delivery_worker"]
+    env_file:
+      - .env
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./src:/app/src
+
+volumes:
+  kafka_data:
+    driver: local
+  redis_data:
+    driver: local

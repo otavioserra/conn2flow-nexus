@@ -1,0 +1,32 @@
+# =============================================================================
+# Conn2Flow Nexus AI - .dockerignore
+# =============================================================================
+
+.git
+.gitignore
+.env
+.env.example
+.vscode
+.idea
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.mypy_cache
+.ruff_cache
+htmlcov
+.coverage
+*.egg-info
+dist
+build
+venv
+.venv
+*.md
+!README.md
+docker-compose*.yml
+Dockerfile
+.dockerignore
+tests/
+temp/
+tmp/
+logs/
