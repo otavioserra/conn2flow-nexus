@@ -30,6 +30,32 @@ This project adopts **SDD Spec-Anchored**:
 - Specs use declarative language (what, not how)
 - Specs define contracts — the implementation may vary
 
+## Source of Truth
+
+The numbered spec set is the normative source of truth for the Nexus system:
+
+- `specs/README.md` is the entry point and index
+- `specs/00-system-overview.md` through `specs/10-testing.md` define behavior, contracts, and acceptance
+- Incremental process artifacts exist to avoid rewriting the normative specs on every review round
+
+Only update the numbered specs when a requirement, contract, acceptance criterion, or approved product/technical decision actually changes.
+
+## Operational SDD Workflow
+
+The project now uses an incremental SDD operating model around the approved specs:
+
+| Artifact | Purpose |
+|----------|---------|
+| [process/00-START-HERE.md](./process/00-START-HERE.md) | Entry point for how to work with the spec set |
+| [process/01-WORKFLOW.md](./process/01-WORKFLOW.md) | Review, change, and implementation flow |
+| [change-requests/CHANGE-REQUEST-TEMPLATE.md](./change-requests/CHANGE-REQUEST-TEMPLATE.md) | Formal spec-change template |
+| [decisions/DECISION-LOG.md](./decisions/DECISION-LOG.md) | Decision history and rationale |
+| [implementation/BATCH-INDEX.md](./implementation/BATCH-INDEX.md) | Active and upcoming implementation batches |
+| [reviews/REVIEW-TEMPLATE.md](./reviews/REVIEW-TEMPLATE.md) | Round-based review template |
+| [validation/VALIDATION-CHECKLIST.md](./validation/VALIDATION-CHECKLIST.md) | Local, automated, and manual validation checklist |
+
+This keeps the core specs stable while still allowing iterative review, batching, validation, and traceable decisions.
+
 ## Specification Index
 
 | #  | Document | Description |
@@ -69,6 +95,7 @@ This project adopts **SDD Spec-Anchored**:
 1. **Before coding**: Read the spec corresponding to the feature
 2. **When implementing**: Verify the code meets the spec
 3. **When testing**: Use the spec as reference for test scenarios
+4. **When reviewing**: Use the batch, review, decision, and validation artifacts instead of rewriting the numbered specs prematurely
 
 ### For AI (Coding Agents)
 
@@ -76,3 +103,4 @@ This project adopts **SDD Spec-Anchored**:
 2. Read the specific spec before generating code
 3. Validate generated code against the spec
 4. Never generate code that contradicts an approved spec
+5. Use the incremental workflow artifacts to record review feedback, scope the next batch, and separate spec changes from implementation comments
