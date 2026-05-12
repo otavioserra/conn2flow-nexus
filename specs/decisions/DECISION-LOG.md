@@ -37,3 +37,8 @@ Suggested statuses:
 - Status: ACCEPTED
 - Topic: next validation layer
 - Decision: after local regression hardening, the next batch should target worker/service tests and then Docker/live-stack validation.
+
+### D-006
+- Status: ACCEPTED
+- Topic: non-normative human intake
+- Decision: `specs/human-requests/` stores human-authored intake only and must be classified into the correct SDD artifact before any normative update.

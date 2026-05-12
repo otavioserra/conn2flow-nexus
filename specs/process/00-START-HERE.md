@@ -12,11 +12,24 @@ The normative source of truth is the numbered spec set:
 - `specs/README.md`
 - `specs/00-system-overview.md` through `specs/10-testing.md`
 
+Use `specs/human-requests/` only for human intake files. That folder is not normative and must not replace the numbered specs, change requests, reviews, batches, validation, or decisions.
+
 Only edit those files when a requirement, contract, acceptance criterion, or approved decision really changes.
 
 For everything else, use incremental artifacts.
 
 ## Recommended flow
+
+### Step 0 - If the request starts from a human intake file
+
+If the user gives you a file path under `specs/human-requests/`, read that file first as non-normative input.
+
+If the user gives only the folder path `specs/human-requests/`, resolve it in this order:
+- `CURRENT.md`
+- `README.md`
+- the most recently updated `.md` file in that folder
+
+Then classify the content into the correct SDD artifact before editing anything normative.
 
 ### Step 1 - Review the relevant numbered specs
 

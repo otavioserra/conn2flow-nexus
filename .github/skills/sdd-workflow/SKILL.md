@@ -21,6 +21,12 @@ Comece por:
 
 Depois leia apenas os specs numerados e arquivos de codigo que controlam o slice atual.
 
+Se a tarefa apontar para `specs/human-requests/*.md` ou para a pasta `specs/human-requests/`, leia primeiro esse intake humano. Quando vier apenas a pasta, use a seguinte ordem deterministica:
+
+1. `CURRENT.md`
+2. `README.md`
+3. o arquivo `.md` mais recente
+
 ## Classificacao da demanda
 
 1. Mudanca de requisito ou contrato:
@@ -41,6 +47,7 @@ Depois leia apenas os specs numerados e arquivos de codigo que controlam o slice
 ## Regras de ouro
 
 - Os specs numerados sao a fonte normativa.
+- `specs/human-requests/` nunca e fonte normativa; ele so alimenta change requests, reviews, batches, decisions ou validacao.
 - Nao reescreva os specs numerados para comentarios pequenos de review.
 - Nao abra o proximo batch antes de o atual estar estavel e revisavel.
 - Quando houver duvida entre mudar spec ou nao, trate primeiro como change request ou review, nao como edicao direta do spec numerado.

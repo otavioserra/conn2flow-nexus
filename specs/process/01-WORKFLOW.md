@@ -33,6 +33,12 @@ Role:
 - explicit scope changes
 - changes that affect the numbered specs
 
+### `human-requests/`
+Role:
+- human-authored intake files
+- raw round notes, briefs, or request drafts
+- non-normative input before SDD classification
+
 ### `implementation/`
 Role:
 - break work into narrow, reviewable batches
@@ -126,3 +132,12 @@ Prefer batches like:
 - Docker health and live-stack validation
 
 Do not mix all of these in the same batch unless there is a strong reason.
+
+## Intake rule
+
+If a new round starts from `specs/human-requests/`, treat that file as briefing only.
+
+Do not:
+- treat it as a spec
+- treat it as approved scope by default
+- skip the classification into change request, review, implementation, validation, or decision

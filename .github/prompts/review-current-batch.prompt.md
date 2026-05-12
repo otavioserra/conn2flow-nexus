@@ -2,10 +2,12 @@
 name: review-current-batch
 description: Revisa o batch atual do Conn2Flow Nexus com foco em spec drift, batch drift, bugs e validacao.
 agent: nexus-sdd-reviewer
-argument-hint: 'Opcionalmente cite arquivos, comportamento esperado ou risco suspeito.'
+argument-hint: 'Opcionalmente cite arquivos, risco suspeito ou um .md em specs/human-requests/.'
 ---
 
 Revise a mudanca mais recente do batch atual.
+
+Se o contexto adicional apontar para `specs/human-requests/`, use esse arquivo apenas como briefing nao normativo sobre a expectativa humana da rodada.
 
 Regras da resposta:
 

@@ -36,9 +36,12 @@ The numbered spec set is the normative source of truth for the Nexus system:
 
 - `specs/README.md` is the entry point and index
 - `specs/00-system-overview.md` through `specs/10-testing.md` define behavior, contracts, and acceptance
+- `specs/human-requests/` stores human intake files and is explicitly non-normative
 - Incremental process artifacts exist to avoid rewriting the normative specs on every review round
 
 Only update the numbered specs when a requirement, contract, acceptance criterion, or approved product/technical decision actually changes.
+
+Human-authored notes, ad hoc requests, and draft briefs should live in `specs/human-requests/`. Those files are intake only and must be consolidated into `change-requests/`, `reviews/`, `implementation/`, `validation/`, `decisions/`, or numbered specs only after the correct SDD classification.
 
 ## Operational SDD Workflow
 
@@ -53,6 +56,7 @@ The project now uses an incremental SDD operating model around the approved spec
 | [implementation/BATCH-INDEX.md](./implementation/BATCH-INDEX.md) | Active and upcoming implementation batches |
 | [reviews/REVIEW-TEMPLATE.md](./reviews/REVIEW-TEMPLATE.md) | Round-based review template |
 | [validation/VALIDATION-CHECKLIST.md](./validation/VALIDATION-CHECKLIST.md) | Local, automated, and manual validation checklist |
+| [human-requests/README.md](./human-requests/README.md) | Non-normative human intake files for new rounds |
 
 This keeps the core specs stable while still allowing iterative review, batching, validation, and traceable decisions.
 
