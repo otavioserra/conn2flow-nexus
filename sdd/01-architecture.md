@@ -128,7 +128,7 @@ conn2flow-nexus/
 │   ├── test_api.py                # 7 API tests
 │   ├── test_llm_router.py         # 6 LLM router tests
 │   └── test_graph.py              # 4 graph tests
-├── specs/                          # ← You are here
+├── sdd/                            # ← You are here
 ├── docs/                           # Educational documentation
 ├── docker-compose.yml
 ├── Dockerfile

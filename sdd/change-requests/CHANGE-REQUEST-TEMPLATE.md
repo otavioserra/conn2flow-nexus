@@ -8,9 +8,9 @@
 - Author:
 - Date:
 
-## Affected normative specs
+## Affected normative SDD files
 
-- specs/
+- sdd/
 
 ## Motivation
 

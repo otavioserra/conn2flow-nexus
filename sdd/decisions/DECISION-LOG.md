@@ -16,7 +16,7 @@ Suggested statuses:
 ### D-001
 - Status: ACCEPTED
 - Topic: normative source of truth
-- Decision: `specs/README.md` plus the numbered spec files are the normative source of truth for Conn2Flow Nexus.
+- Decision: `sdd/README.md` plus the numbered SDD files are the normative source of truth for Conn2Flow Nexus.
 
 ### D-002
 - Status: ACCEPTED
@@ -41,4 +41,4 @@ Suggested statuses:
 ### D-006
 - Status: ACCEPTED
 - Topic: non-normative human intake
-- Decision: `specs/human-requests/` stores human-authored intake only and must be classified into the correct SDD artifact before any normative update.
+- Decision: `sdd/human-requests/` stores human-authored intake only and must be classified into the correct SDD artifact before any normative update.

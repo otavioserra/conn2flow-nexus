@@ -34,14 +34,14 @@ This project adopts **SDD Spec-Anchored**:
 
 The numbered spec set is the normative source of truth for the Nexus system:
 
-- `specs/README.md` is the entry point and index
-- `specs/00-system-overview.md` through `specs/10-testing.md` define behavior, contracts, and acceptance
-- `specs/human-requests/` stores human intake files and is explicitly non-normative
+- `sdd/README.md` is the entry point and index
+- `sdd/00-system-overview.md` through `sdd/10-testing.md` define behavior, contracts, and acceptance
+- `sdd/human-requests/` stores human intake files and is explicitly non-normative
 - Incremental process artifacts exist to avoid rewriting the normative specs on every review round
 
 Only update the numbered specs when a requirement, contract, acceptance criterion, or approved product/technical decision actually changes.
 
-Human-authored notes, ad hoc requests, and draft briefs should live in `specs/human-requests/`. Those files are intake only and must be consolidated into `change-requests/`, `reviews/`, `implementation/`, `validation/`, `decisions/`, or numbered specs only after the correct SDD classification.
+Human-authored notes, ad hoc requests, and draft briefs should live in `sdd/human-requests/`. Those files are intake only and must be consolidated into `change-requests/`, `reviews/`, `implementation/`, `validation/`, `decisions/`, or numbered SDD files only after the correct SDD classification.
 
 ## Operational SDD Workflow
 
@@ -103,7 +103,7 @@ This keeps the core specs stable while still allowing iterative review, batching
 
 ### For AI (Coding Agents)
 
-1. Read `specs/README.md` for general context
+1. Read `sdd/README.md` for general context
 2. Read the specific spec before generating code
 3. Validate generated code against the spec
 4. Never generate code that contradicts an approved spec

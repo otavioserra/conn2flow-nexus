@@ -23,7 +23,7 @@ Rule:
 - Focus:
   - task processor behavior
   - Redis/Kafka service-level tests
-  - alignment with specs/06-worker-pipeline.md and specs/10-testing.md
+  - alignment with sdd/06-worker-pipeline.md and sdd/10-testing.md
 
 ### BATCH-003 - Live stack validation and spec drift check
 - Status: PENDING

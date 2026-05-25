@@ -20,13 +20,13 @@ Validate and harden the most concrete gap between the approved specs and the cur
 
 ## Files in scope
 
-- specs/README.md
-- specs/process/00-START-HERE.md
-- specs/process/01-WORKFLOW.md
-- specs/decisions/DECISION-LOG.md
-- specs/implementation/BATCH-INDEX.md
-- specs/implementation/BATCH-001-current-scope.md
-- specs/validation/VALIDATION-CHECKLIST.md
+- sdd/README.md
+- sdd/process/00-START-HERE.md
+- sdd/process/01-WORKFLOW.md
+- sdd/decisions/DECISION-LOG.md
+- sdd/implementation/BATCH-INDEX.md
+- sdd/implementation/BATCH-001-current-scope.md
+- sdd/validation/VALIDATION-CHECKLIST.md
 - tests/test_security.py
 - tests/test_delivery_worker.py
 

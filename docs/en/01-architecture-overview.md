@@ -104,7 +104,7 @@ conn2flow-nexus/
 │       └── events.py             # Kafka event models
 ├── tests/                        # Unit tests
 ├── docs/                         # Documentation (this folder)
-├── specs/                        # SDD specifications
+├── sdd/                          # SDD specifications
 ├── docker-compose.yml            # Docker orchestration
 ├── Dockerfile                    # Container build
 ├── requirements.txt              # Python dependencies

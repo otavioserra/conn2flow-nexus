@@ -9,10 +9,10 @@ This workflow package exists to avoid two common problems:
 
 The normative source of truth is the numbered spec set:
 
-- `specs/README.md`
-- `specs/00-system-overview.md` through `specs/10-testing.md`
+- `sdd/README.md`
+- `sdd/00-system-overview.md` through `sdd/10-testing.md`
 
-Use `specs/human-requests/` only for human intake files. That folder is not normative and must not replace the numbered specs, change requests, reviews, batches, validation, or decisions.
+Use `sdd/human-requests/` only for human intake files. That folder is not normative and must not replace the numbered SDD files, change requests, reviews, batches, validation, or decisions.
 
 Only edit those files when a requirement, contract, acceptance criterion, or approved decision really changes.
 
@@ -22,9 +22,9 @@ For everything else, use incremental artifacts.
 
 ### Step 0 - If the request starts from a human intake file
 
-If the user gives you a file path under `specs/human-requests/`, read that file first as non-normative input.
+If the user gives you a file path under `sdd/human-requests/`, read that file first as non-normative input.
 
-If the user gives only the folder path `specs/human-requests/`, resolve it in this order:
+If the user gives only the folder path `sdd/human-requests/`, resolve it in this order:
 - `CURRENT.md`
 - `README.md`
 - the most recently updated `.md` file in that folder

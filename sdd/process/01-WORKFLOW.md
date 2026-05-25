@@ -135,7 +135,7 @@ Do not mix all of these in the same batch unless there is a strong reason.
 
 ## Intake rule
 
-If a new round starts from `specs/human-requests/`, treat that file as briefing only.
+If a new round starts from `sdd/human-requests/`, treat that file as briefing only.
 
 Do not:
 - treat it as a spec

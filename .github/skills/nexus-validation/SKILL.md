@@ -9,7 +9,7 @@ Use esta skill para validar mudancas no Nexus respeitando o fluxo SDD.
 
 ## Ordem recomendada
 
-1. Leia [validation checklist](../../../specs/validation/VALIDATION-CHECKLIST.md) e [batch index](../../../specs/implementation/BATCH-INDEX.md).
+1. Leia [validation checklist](../../../sdd/validation/VALIDATION-CHECKLIST.md) e [batch index](../../../sdd/implementation/BATCH-INDEX.md).
 2. Rode primeiro o menor pytest coerente com o batch ativo.
 3. Amplie para `pytest -q` quando o slice local estiver estavel.
 4. So depois parta para validacao de stack com Docker Compose quando o batch realmente pedir isso.
@@ -26,4 +26,4 @@ Use esta skill para validar mudancas no Nexus respeitando o fluxo SDD.
 
 - Use o ambiente Python configurado do repo antes de rodar `pytest`.
 - Se o batch atual nao exigir stack real, nao pule direto para Docker Compose.
-- Quando uma validacao relevante for concluida, atualize a evidencia em `specs/validation/VALIDATION-CHECKLIST.md` se a tarefa pedir consolidacao documental.
+- Quando uma validacao relevante for concluida, atualize a evidencia em `sdd/validation/VALIDATION-CHECKLIST.md` se a tarefa pedir consolidacao documental.

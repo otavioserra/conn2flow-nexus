@@ -314,7 +314,7 @@ conn2flow-nexus/
 ├── requirements.txt      # Dependencies
 ├── README.md
 ├── docs/                 # Documentation
-├── specs/                # SDD specifications
+├── sdd/                  # SDD specifications
 ├── src/                  # Application source code
 │   ├── __init__.py
 │   ├── main.py           # Entry point
