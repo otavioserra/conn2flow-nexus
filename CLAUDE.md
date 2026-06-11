@@ -21,3 +21,11 @@
 
 - `sdd-workflow`: decidir o artefato certo e manter o batch alinhado ao fluxo.
 - `project-validation`: escolher a menor validação executável para o slice atual.
+
+## Otimização de Contexto e Arquivamento
+
+- Mantenha `sdd/decisions/DECISION-LOG.md`, `sdd/implementation/BATCH-INDEX.md` e `sdd/validation/VALIDATION-CHECKLIST.md` com no máximo 10 itens correntes ou ativos.
+- Mantenha também `sdd/human-requests/` enxuto, preservando no máximo 10 requisições correntes ou recentes fora de `archive/`.
+- Mova históricos antigos para a subpasta `archive/` correspondente: `sdd/decisions/archive/`, `sdd/human-requests/archive/`, `sdd/implementation/archive/` ou `sdd/validation/archive/`.
+- Nos arquivos principais, substitua o histórico arquivado por tabelas Markdown resumidas com 1 linha por item e link direto para o arquivo em `archive/`.
+- Ao carregar contexto inicial, priorize os arquivos principais e abra itens em `archive/` apenas quando o batch, a requisição ativa ou um link de rastreabilidade exigir.
