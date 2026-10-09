@@ -1,4 +1,4 @@
-# Memória de Engenharia — Execução
+# Engineering Memory - Execution
 
 > **Propósito**: Este diário de bordo é reservado aos **Agentes Executores IA**. Registre aqui aprendizados sobre o ambiente local, particularidades do compilador/build, hacks temporários, bugs resolvidos e lições aprendidas durante a execução de tarefas.
 >

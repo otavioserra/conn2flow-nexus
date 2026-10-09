@@ -1,4 +1,4 @@
-# Memória de Engenharia — Chefia
+# Engineering Memory - Chief
 
 > **Propósito**: Este diário de bordo é reservado ao **Engenheiro Chefe Humano**. Registre aqui suas preferências de design, convenções de código, restrições técnicas e regras de negócio que devem ser respeitadas em todas as sessões de trabalho.
 >
