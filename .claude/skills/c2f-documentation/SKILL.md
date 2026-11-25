@@ -8,7 +8,7 @@ user-invocable: true
 
 # ⚡ Gatilho Obrigatório
 - **TRIGGER**: Pedido para documentar, corrigir ou migrar documentação (biblioteca, módulo, API, CLI, hook, guia); rodar a rotina periódica de docs; publicar as docs no site `/docs/`; criar ou alterar `docs.config.json` de um projeto.
-- **SKIP APENAS SE**: Edição de artefatos SDD (`sdd/`), README de repositório ou docblocks de código sem relação com `ai-workspace/<idioma>/docs/`.
+- **SKIP APENAS SE**: Edição de artefatos MDD (`memory/`), README de repositório ou docblocks de código sem relação com `ai-workspace/<idioma>/docs/`.
 - **CONSEQUÊNCIA DE IGNORAR**: Documentação defasada ou alucinada (escrita a partir do texto antigo), docs sem `verified_at` invisíveis ao ranking, tradução divergente, e páginas editadas no painel sobrescritas no próximo build.
 
 Complementa a `c2f-documentation-governance` (princípio da autoridade do código). Esta skill é o **procedimento**.
@@ -60,10 +60,10 @@ verified_at: 5b4348ab       # git rev-parse --short HEAD do Core no momento da c
    - rode `php cli/c2f.php docs:extract --all`;
    - rode de novo `php cli/c2f.php docs:audit` até o item sair do ranking (score 0).
 7. **Publicar (local):**
-   - `php cli/c2f.php docs:build --project=conn2flow-site-local`, depois `php cli/c2f.php project:update-all conn2flow-site-local`;
+   - `php cli/c2f.php docs:build --project=conn2flow-site-local`, depois `php cli/c2f.php project:deploy conn2flow-site-local`;
    - confira as páginas (HTTP 200, `c2f page:inspect ... --screenshot`).
    - O deploy de **produção é do operador**.
-8. Registre no SDD do lote e atualize a memória de execução.
+8. Registre no relatório do lote (`memory/implementation/batch-YYY.md`) e atualize a memória de execução.
 
 ## 4. Escrita
 
@@ -91,6 +91,12 @@ verified_at: 5b4348ab       # git rev-parse --short HEAD do Core no momento da c
 - O build é idempotente. Rodar duas vezes sem mudar o Markdown não altera arquivo.
 - Referência de implementação: `conn2flow-site` (REQ-057 / BATCH-050) e Core `cli/src/Support/Docs/`.
 
+### Build a partir de `git archive origin/main` (publicar só o que está commitado)
+
+1. Antes de gerar `/docs/` a partir de um Core com árvore compartilhada ou alterações em andamento, extraia uma fonte limpa do commit aprovado: `git fetch origin` e `git archive origin/main -- ai-workspace/ | tar -x -C <dir-temporario>` (ou equivalente determinístico).
+2. Execute `docs:build` contra a fonte extraída, ou garanta que a fonte seja idêntica a `origin/main`, sem rascunhos nem arquivos não rastreados do working tree.
+3. Remova o diretório temporário ao final. Nunca publique documentação que não esteja commitada e integrada em `origin/main`.
+
 ## ⛔ Proibições
 
 - Documentar a partir de memória, do texto legado ou de outra doc sem abrir o código.
@@ -104,3 +110,10 @@ verified_at: 5b4348ab       # git rev-parse --short HEAD do Core no momento da c
 Cada tela documentada recebe uma seção padronizada "Como usar" ("How to use" no par inglês). Confira os rótulos reais em resources/ e os handlers atuais antes de escrever. Descreva entrada/rota e permissão, campos obrigatórios/opcionais com seus nomes literais, sequência de botões com seus nomes literais, resultado esperado e recuperação de erro. Mantenha o par de idiomas alinhado e use os termos exibidos naquele idioma.
 
 Não substitua nome visível por coluna SQL nem invente fluxo a partir de manual antigo. O assistente consulta essa seção via RAG: comportamento não documentado não pode ser prometido. Preserve referência técnica separadamente e confira o uso contra a tela real quando o fluxo mudar.
+
+## REQ-077 — Pipeline, worktrees e preservação (DEC-136)
+
+- Projeto: `./c2f project:deploy <id>` é o padrão (95% dos casos). Core: `./c2f manager:update-all`. `./c2f project:update-all <id>` é proibido na rotina de projeto; permitido exclusivamente em lote que altera Core e projeto simultaneamente.
+- Antes de deploy, confira `git branch --show-current` e `git status --short` na origem; não publique trabalho alheio/inacabado. Confira o destino e sua autorização. Categoria B (skills/documentação/testes/memória): somente checks locais, sem deploy. Execução sequencial, foreground, logs e locks continuam obrigatórios.
+- Worktrees por conveniência são proibidas. Só criar com concorrência multi-agente comprovada no mesmo repositório; em dúvida, consultar o humano antes. Registre raiz original, caminho temporário e concorrência na requisição e lote. Ao concluir/homologar, audite trabalho único, integração na main e junctions, então `git worktree remove <caminho>` e `git worktree prune`. Nunca use força para destruir trabalho não integrado; preserve e reporte impedimentos.
+- DEC-136: manter por padrão; nada é removido (arquivo, `status='D'`, `DELETE`) sem confirmação explícita do operador humano. Retirada vira choque pendente; `--confirmar-retirada` só quando pedido pelo operador. Fonte incompleta não autoriza retirada.
